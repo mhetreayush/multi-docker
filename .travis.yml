@@ -5,25 +5,25 @@ services:
   - docker
 
 before_install:
-  - docker build -t ayush/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mhetreayush/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true ayush/react-test npm run test
+  - docker run -e CI=true mhetreayush/react-test npm run test
 
 after_success:
-  - docker build -t ayush/multi-client -f ./client/Dockerfile ./client
-  - docker build -t ayush/multi-nginx -f ./nginx/Dockerfile ./nginx
-  - docker build -t ayush/multi-server -f ./server/Dockerfile ./server
-  - docker build -t ayush/multi-worker -f ./worker/Dockerfile ./worker
+  - docker build -t mhetreayush/multi-client -f ./client/Dockerfile ./client
+  - docker build -t mhetreayush/multi-nginx -f ./nginx/Dockerfile ./nginx
+  - docker build -t mhetreayush/multi-server -f ./server/Dockerfile ./server
+  - docker build -t mhetreayush/multi-worker -f ./worker/Dockerfile ./worker
 
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Take those images and push them to the docker hub
-  - docker push ayush/multi-client
-  - docker push ayush/multi-nginx
-  - docker push ayush/multi-server
-  - docker push ayush/multi-worker
+  - docker push mhetreayush/multi-client
+  - docker push mhetreayush/multi-nginx
+  - docker push mhetreayush/multi-server
+  - docker push mhetreayush/multi-worker
 
   # Logout of docker
   - docker logout
