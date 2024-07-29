@@ -29,6 +29,7 @@ after_success:
   - docker logout
 
 deploy:
+  provider: elasticbeanstalk
   region: ap-south-1
   app: multi-docker
   env: Multi-docker-env
