@@ -1,0 +1,17 @@
+language: generic
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t ayush/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true ayush/react-test npm run test
+
+after_success:
+  - docker build -t ayush/multi-client -f ./client/Dockerfile ./client
+  - docker build -t ayush/multi-nginx -f ./nginx/Dockerfile ./nginx
+  - docker build -t ayush/multi-worker -f ./worker/Dockerfile ./worker
+  - docker build -t ayush/multi-server -f ./server/Dockerfile ./server
