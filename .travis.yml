@@ -27,3 +27,12 @@ after_success:
 
   # Logout of docker
   - docker logout
+
+deploy:
+  region: ap-south-1
+  app: multi-docker
+  env: Multi-docker-env
+  bucket_name: elasticbeanstalk-ap-south-1-979631827024
+  bucket_path: multi-docker
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
